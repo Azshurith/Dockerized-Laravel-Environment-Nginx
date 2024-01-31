@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+
+    nginx:
+        container_name: ${PROJECT}-nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "8088:80"
+            # - "443:443" SSL
+        volumes:
+            - ./Web:/var/www
+            - ./.docker/Nginx/:/etc/nginx/conf.d/
+        depends_on:
+            - php
+            - mariadb
+        networks:
+            - shared_network
+
+    php:
+        container_name: ${PROJECT}-php
+        build:
+            context: ./
+            dockerfile: ./.docker/Php/Dockerfile
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www
+        volumes:
+            - ./Web:/var/www
+            - ./.docker/Php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - shared_network
+
+    mariadb:
+        container_name: ${PROJECT}-database
+        image: mariadb
+        restart: unless-stopped
+        tty: true
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_NAME}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - database:/var/lib/mysql
+            - ./.docker/Mysql/my.cnf:/etc/mysql/my.cnf
+        networks:
+            - shared_network
+
+networks:
+    shared_network:
+        driver: bridge
+
+volumes:
+    database:
+        driver: local
