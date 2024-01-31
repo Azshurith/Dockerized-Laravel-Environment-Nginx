@@ -1,16 +1,23 @@
-# 🌟 Laravel Docker 🐋 Environment with Artisan 🌟
+# 🌟 Laravel Docker 🐋 Environment with Nginx 🌟
 
 [![License](https://img.shields.io/badge/license-GNU-blue.svg)](https://github.com/Azshurith/Dockerized-Laravel-Environment-Artisan/blob/main/LICENSE)
 
-This repository contains a Docker environment for Laravel applications utilizing Artisan for streamlined development and deployment.
+This repository contains a Docker environment for Laravel applications utilizing Nginx for streamlined development and deployment.
 
 ## 🛠️ Makefile Commands
 
 ```makefile
 help                 Displays all available Commands
-start_project        Starts the Project
-stop_project         Stops the Project
-destroy_project      Deletes the Project
+project_start        Starts the Project
+project_stop         Stops the Project
+project_destroy      Deletes the Project
+project_create       Creates a laravel Project
+project_pull         Setup Laravel Project from Git
+project_chown        Sets the project's permission to www
+composer_update      Update Project's Composer
+setup_env            Create .env from .env sample
+artisan_key          Generate Artisan Project Key
+deploy_php           Execute Command to PHP Container
 ```
 
 ## 📝 Environment Variables (.env)
@@ -38,9 +45,17 @@ PROJECT_REPOSITORY=
 
 ### Installation 📦
 
-1. Set up your environment variables in the .env file.
-2. Run make start_project to start the Docker environment.
-3. Access your Laravel application at http://localhost:8000.
+  **Setting up Laravel from your Git Repository**
+  1. Set up your environment variables in the .env file.
+  2. Run `make project_start` to start the Docker environment.
+  3. Run `make project_pull` to clone your git repository.
+  4. Access your Laravel application at http://localhost:8088/.
+
+  **Setting up a Fresh Laravel Project**
+  1. Set up your environment variables in the .env file.
+  2. Run `make project_start` to start the Docker environment.
+  3. Run `make project_create` to crate a fresh laravel project.
+  4. Access your Laravel application at http://localhost:8088/.
 
 ## Contributing 🤝
 
