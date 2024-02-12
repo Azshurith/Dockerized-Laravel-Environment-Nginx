@@ -15,7 +15,7 @@ project_destroy: ## Deletes the Project
 	docker compose down -v
 
 project_create: ## Creates a laravel Project
-	docker exec -it -u root laravel-php composer create-project laravel/laravel .
+	docker exec -it -u root ${PROJECT}-php composer create-project laravel/laravel .
 	docker exec -it -u root laravel-php chmod -R 777 /var/www/storage
 
 project_pull: ## Setup Laravel Project from Git
@@ -25,17 +25,20 @@ project_pull: ## Setup Laravel Project from Git
 	make setup_env
 	make artisan_key
 
+project_vite: ## Starts vite
+	docker exec -it -u root ${PROJECT}-php npm run dev
+
 project_chown: ## Sets the project's permission to www
-	docker exec -it -u root laravel-php chown -R www:www /var/www
+	docker exec -it -u root ${PROJECT}-php chown -R www:www /var/www
 
 composer_update: ## Update Project's Composer
-	docker exec -it -u root laravel-php composer update
+	docker exec -it -u root ${PROJECT}-php composer update
 
 setup_env: ## Create .env from .env sample
-	docker exec -it -u root laravel-php cp .env.example .env
+	docker exec -it -u root ${PROJECT}-php cp .env.example .env
 	
 artisan_key: ## Generate Artisan Project Key
-	docker exec -it -u root laravel-php php artisan key:generate
+	docker exec -it -u root ${PROJECT}-php php artisan key:generate
 
 deploy_php: ## Execute Command to PHP Container
-	docker exec -it -u root laravel-php /bin/bash
+	docker exec -it -u root ${PROJECT}-php /bin/bash
