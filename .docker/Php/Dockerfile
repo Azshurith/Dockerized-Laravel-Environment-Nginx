@@ -18,7 +18,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     libonig-dev \
     libzip-dev \
-    libgd-dev
+    libgd-dev \
+    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs\
+    && apt-get install -y npm
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -37,6 +40,9 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Ensure www-data has the correct permissions
 RUN chown -R www:www /var/www
+
+# Install Node Plugins
+RUN npm install -g vite
 
 # Change current user to www
 USER www
