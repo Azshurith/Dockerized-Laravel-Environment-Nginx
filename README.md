@@ -14,6 +14,8 @@ project_destroy      Deletes the Project
 project_create       Creates a laravel Project
 project_pull         Setup Laravel Project from Git
 project_chown        Sets the project's permission to www
+npm_vite             Starts vite
+npm_install          Install NPM package
 composer_update      Update Project's Composer
 setup_env            Create .env from .env sample
 artisan_key          Generate Artisan Project Key
