@@ -30,8 +30,11 @@ project_pull: ## Setup Laravel Project from Git
 project_chown: ## Sets the project's permission to www
 	docker exec -it -u root ${PROJECT}-php chown -R www:www /var/www
 
-npm_vite: ## Starts vite
-	docker exec -it -u root ${PROJECT}-php npm run dev
+vite_start: ## Starts local vite
+	docker exec -it -u root ${PROJECT}-php vite --host
+
+vite_build: ## Build vite scripts
+	docker exec -it -u root ${PROJECT}-php vite build
 
 npm_install: ## Install NPM package
 	docker exec -it -u root ${PROJECT}-php npm install
