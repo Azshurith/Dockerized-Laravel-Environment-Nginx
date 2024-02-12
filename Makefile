@@ -17,6 +17,7 @@ project_destroy: ## Deletes the Project
 project_create: ## Creates a laravel Project
 	docker exec -it -u root ${PROJECT}-php composer create-project laravel/laravel .
 	docker exec -it -u root laravel-php chmod -R 777 /var/www/storage
+	make npm_install
 
 project_pull: ## Setup Laravel Project from Git
 	git clone $(PROJECT_REPOSITORY) Web
@@ -24,12 +25,16 @@ project_pull: ## Setup Laravel Project from Git
 	make composer_update
 	make setup_env
 	make artisan_key
-
-project_vite: ## Starts vite
-	docker exec -it -u root ${PROJECT}-php npm run dev
+	make npm_install
 
 project_chown: ## Sets the project's permission to www
 	docker exec -it -u root ${PROJECT}-php chown -R www:www /var/www
+
+npm_vite: ## Starts vite
+	docker exec -it -u root ${PROJECT}-php npm run dev
+
+npm_install: ## Install NPM package
+	docker exec -it -u root ${PROJECT}-php npm install
 
 composer_update: ## Update Project's Composer
 	docker exec -it -u root ${PROJECT}-php composer update
