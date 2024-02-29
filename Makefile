@@ -13,7 +13,7 @@ project_destroy: ## Deletes the Project
 
 project_create: ## Creates a laravel Project
 	docker exec -it -u root ${PROJECT}-php composer create-project laravel/laravel .
-	docker exec -it -u root laravel-php chmod -R 777 /var/www/storage
+	docker exec -it -u root ${PROJECT}-php chmod -R 777 /var/www/storage
 	make npm_install
 
 project_pull: ## Setup Laravel Project from Git
