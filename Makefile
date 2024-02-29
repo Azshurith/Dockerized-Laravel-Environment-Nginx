@@ -44,5 +44,5 @@ setup_env: ## Create .env from .env sample
 artisan_key: ## Generate Artisan Project Key
 	docker exec -it -u root ${PROJECT}-php php artisan key:generate
 
-deploy_php: ## Execute Command to PHP Container
+php_deploy: ## Execute Command to PHP Container
 	docker exec -it -u root ${PROJECT}-php /bin/bash
