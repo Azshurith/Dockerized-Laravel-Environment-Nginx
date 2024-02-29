@@ -46,3 +46,6 @@ artisan_key: ## Generate Artisan Project Key
 
 php_deploy: ## Execute Command to PHP Container
 	docker exec -it -u root ${PROJECT}-php /bin/bash
+
+database_deploy: ## Execute Command to Database Container
+	docker exec -it -u root ${PROJECT}-database /bin/bash
