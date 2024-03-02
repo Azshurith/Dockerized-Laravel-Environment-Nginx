@@ -2,6 +2,20 @@ version: "3"
 
 services:
 
+    emulator:
+        container_name: ${PROJECT}-emulator
+        image: node:latest
+        restart: unless-stopped
+        environment:
+            GAME_NAME: ${PROJECT}
+        tty: true
+        ports:
+            - "5174:5174"
+        volumes:
+            - ./Emulator:/var/emulator
+        working_dir: /var/emulator
+        command: tail -F anything
+
     nginx:
         container_name: ${PROJECT}-nginx
         image: nginx:alpine
@@ -35,7 +49,7 @@ services:
             - shared_network
 
     mariadb:
-        container_name: ${PROJECT}-database
+        container_name: ${PROJECT}-mariadb
         image: mariadb
         restart: unless-stopped
         tty: true
