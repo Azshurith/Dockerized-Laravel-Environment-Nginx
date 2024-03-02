@@ -66,6 +66,30 @@ services:
         networks:
             - shared_network
 
+    composer:
+        container_name: ${PROJECT}-composer
+        image: composer:latest
+        restart: unless-stopped
+        tty: true
+        volumes:
+            - ./Web:/var/www
+        working_dir: /var/www
+        depends_on:
+            - php
+        command: tail -F anything
+        networks:
+            - shared_network
+
+    npm:
+        container_name: ${PROJECT}-npm
+        image: node:latest
+        restart: unless-stopped
+        tty: true
+        volumes:
+            - ./Web:/var/www
+        working_dir: /var/www
+        command: tail -F anything
+
 networks:
     shared_network:
         driver: bridge
