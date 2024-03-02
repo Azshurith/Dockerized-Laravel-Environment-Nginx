@@ -10,7 +10,7 @@ services:
             GAME_NAME: ${PROJECT}
         tty: true
         ports:
-            - "5174:5174"
+            - "5588:5588"
         volumes:
             - ./Emulator:/var/emulator
         working_dir: /var/emulator
