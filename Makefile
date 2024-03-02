@@ -35,6 +35,9 @@ vite_build: ## Build vite scripts
 npm_install: ## Install NPM package
 	docker exec -it -u root ${PROJECT}-npm npm install
 
+npm_dev: ## Starts NPM Development
+	docker exec -it -u root ${PROJECT}-npm npm run dev -- --host
+
 composer_update: ## Update Project's Composer
 	docker exec -it -u root ${PROJECT}-composer composer update
 
