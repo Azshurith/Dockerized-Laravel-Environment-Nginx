@@ -2,9 +2,9 @@ version: "3"
 
 services:
 
-    emulator:
-        container_name: ${PROJECT}-emulator
-        image: node:latest
+    server:
+        container_name: ${PROJECT}-server
+        image: oven/bun:latest
         restart: unless-stopped
         environment:
             GAME_NAME: ${PROJECT}
@@ -12,8 +12,8 @@ services:
         ports:
             - "5588:5588"
         volumes:
-            - ./Emulator:/var/emulator
-        working_dir: /var/emulator
+            - ./Server:/var/server
+        working_dir: /var/server
         command: tail -F anything
 
     nginx:

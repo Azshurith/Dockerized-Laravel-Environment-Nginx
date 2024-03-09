@@ -62,11 +62,11 @@ php_chown: ## Execute Command to PHP Container
 mariadb_deploy: ## Execute Command to MariaDB Container
 	docker exec -it -u root ${PROJECT}-mariadb /bin/bash
 
-emulator_install: ## Execute Command to Emulator Container
-	docker exec -it -u root ${PROJECT}-emulator npm install
+server_install: ## Execute Command to Server Container
+	docker exec -it -u root ${PROJECT}-server bun install
 
-emulator_deploy: ## Execute Command to Emulator Container
-	docker exec -it -u root ${PROJECT}-emulator /bin/bash
+server_deploy: ## Execute Command to Server Container
+	docker exec -it -u root ${PROJECT}-server /bin/bash
 
-emulator_start: ## Execute Command to Emulator Container
-	docker exec -it -u root ${PROJECT}-emulator npm run start
+server_start: ## Execute Command to Server Container
+	docker exec -it -u root ${PROJECT}-server bun run src/Unified.ts --watch --hot
